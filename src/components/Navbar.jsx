@@ -19,8 +19,8 @@ export default function Navbar({ onModelChange })  {
                     <select id="modelSelect" className="w-auto h-10 px-3 py-2 rounded-md border bg-white autofocus focus:outline-none focus:ring-2 focus:ring-blue-500
                         dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 dark:focus:ring-gray-500 dark:focus:ring-opacity-75
                     " onChange={handleChange} >
-                        <option value="gemeni">Gemini-1.5-flash</option>
-                        <option value="gpt-4">GPT-4-mini</option>
+                        <option value="gemeni">Gemini</option>
+                        <option value="gpt4">GPT4</option>
                         <option value="panchobot">PanchoBot</option>
                     </select>
                 </div>
