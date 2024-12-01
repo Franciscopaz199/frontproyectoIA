@@ -135,7 +135,7 @@ export default function Chabot({ selectedModel }) {
 
                     </form>
                     {
-                        (messages.length === 0) && <UrlEditor />
+                       /* (messages.length === 0) && <UrlEditor /> */
                     }
                     {messages.length > 0 && <Footer />}
                 </div>

@@ -1,5 +1,5 @@
 export async function preguntar(pregunta, modelo) {
-    const url = localStorage.getItem('URL_PETICION') || 'http://127.0.0.1:8000/test/';
+    const url = localStorage.getItem('URL_PETICION') || 'https://balimpilador.systems:90/test/';
     try {
         const response = await fetch(url, {
             method: "POST",
