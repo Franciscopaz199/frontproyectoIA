@@ -13,7 +13,7 @@ export default function Main() {
         setSelectedModel(newModel);
     };
     return (
-        <div className=" w-full min-h-screen  flex   flex-col dark:bg-gray-900">
+        <div className=" w-full min-h-screen  flex   flex-col ">
             <Navbar onModelChange={handleModelChange} />
             <Chabot selectedModel={selectedModel} />
         </div>

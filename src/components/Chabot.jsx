@@ -27,7 +27,7 @@ export default function Chabot({ selectedModel }) {
             // Bloquea el input y muestra el mensaje de carga
             setIsLoading(true);
             const loadingMessage = {
-                text: "Escribiendo...",
+                text: "PanchoBot esta escribiendo...",
                 role: "bot",
             };
             setMessages((prevMessages) => [...prevMessages, loadingMessage]);
@@ -36,7 +36,10 @@ export default function Chabot({ selectedModel }) {
                 const respuesta = await preguntar(userMessage.text, selectedModel);
                 setMessages((prevMessages) => [
                     ...prevMessages.slice(0, -1), // Elimina el mensaje de carga
-                    { text: respuesta, role: "bot" },
+                    { text: respuesta, 
+                        role: "bot" ,
+                        modelo: selectedModel
+                    },
                 ]);
 
             } catch (error) {
@@ -58,7 +61,7 @@ export default function Chabot({ selectedModel }) {
         return () => {
             chatForm.removeEventListener("submit", handleSubmit);
         };
-    }, [selectedModel]); 
+    }, [selectedModel]);
 
     // Efecto para mover el scroll al final cuando los mensajes cambian
     useEffect(() => {
@@ -72,27 +75,37 @@ export default function Chabot({ selectedModel }) {
         <div className={`flex-1 flex  items-center  background flex-col ${messages.length > 0 ? 'justify-end' : 'justify-center'}`}>
             <div className={`flex flex-1 flex-col w-full max-w-[49rem] p-4 mt-12  ${messages.length == 0 ? 'hidden' : ''}
                 p-4 py-8 rounded-xl mb-12
-            ` 
-        }>
+            `
+            }>
                 {messages.map((message, index) => (
                     <div key={index}
                         className={`flex items-center  mb-4 ${message.role === "bot" ? "justify-start" : "justify-end"
                             }`}
                     >
                         <div
-                            className={`relative p-2 rounded-lg max-w-[80%] ${message.role === "bot" ? "bg-blue-600 text-white" : "bg-gray-200"
+                            className={`relative p-2 rounded-lg max-w-[80%] ${message.role === "bot" ? "bg-gray-200 dark:bg-gray-500 dark:text-white" : "bg-blue-600 text-white"
                                 }`}
                         >
-                            {message.index} {message.text}
-                           {
+                           {message.role === "bot" && (
+                            
+                            <b className="text-sm  dark:text-blue-200 text-blue-800">
+                                PanchoBot  {message.modelo}
+                            </b>
+                           )}
+                                 <p class="text-base ">
+                             {message.index} {message.text}
+                         </p>
+                            {
                                 message.role === "bot" && (
-                                    <div class="absolute w-3 h-3 bg-blue-600 top-[6px] -left-[5px] transform rotate-45"></div>
+                                    <div class="absolute w-3 h-3 bg-gray-200 top-[6px] -left-[5px] transform rotate-45 bg-gray-200 dark:bg-gray-500 dark:text-white">
+
+                                    </div>
                                 )
-                           }
+                            }
                         </div>
                     </div>
                 ))}
-                <div ref={messageEndRef}></div>
+                <div ref={messageEndRef} className="mt-4"></div>
             </div>
             <div className="
             flex 
@@ -106,8 +119,8 @@ export default function Chabot({ selectedModel }) {
                     <h1 data-testid="app-title"
                         className="font-heading text-pretty text-center text-[29px] font-semibold tracking-tighter text-gray-900 sm:text-[32px] md:text-[46px]
                         dark:text-gray-100">
-                        Enviame un mensaje para ayudarte :)
-                
+                        Envíame un mensaje para ayudarte :)
+
                     </h1>
                     <p className="text-center text-gray-600 text-sm dark:text-gray-300">
                         Soy un chatbot que te ayudará a resolver tus dudas, solo tienes que escribir tu pregunta y yo te responderé.
@@ -116,7 +129,9 @@ export default function Chabot({ selectedModel }) {
                 <div className={`flex-col flex items-center  ${messages.length > 0 ? 'w-full max-w-[49rem] fixed bottom-0 bg-white' : ''}
                     dark:bg-gray-900 dark:text-gray-100 bg-white
                 `}>
-                    <form id="chatForm" className={`w-full flex items-center  `} disabled={isLoading}>
+                    <form id="chatForm" className={`w-full flex items-center 
+                            space-x-2 mb-4
+                        `} disabled={isLoading}>
                         <input
                             type="text"
                             id="messageInput"
@@ -135,7 +150,7 @@ export default function Chabot({ selectedModel }) {
 
                     </form>
                     {
-                       /* (messages.length === 0) && <UrlEditor /> */
+                        /* (messages.length === 0) && <UrlEditor /> */
                     }
                     {messages.length > 0 && <Footer />}
                 </div>

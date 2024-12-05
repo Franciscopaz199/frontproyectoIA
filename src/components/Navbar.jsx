@@ -1,18 +1,23 @@
 import React from "react";
 import DarkModeToggle from "./Darkmode";
+import panchoBotLogo from "../images/panchobot.jpeg";
 
-export default function Navbar({ onModelChange })  {
+
+export default function Navbar({ onModelChange }) {
     const handleChange = (e) => {
-        
+
         onModelChange(e.target.value); // Actualiza el modelo seleccionado en Main
-      };
-    
+    };
+
 
     return (
         <div className=" w-full h-16 flex items-center lg:justify-around justify-between px-4 pos fixed top-0 left-0 z-50 bg-white dark:bg-gray-900 ">
-            <div className="text-blue-800 text-2xl font-bold
-                darl:text-blue-200 dark:text-blue-200
-            ">PanchoBot</div>
+            <div className="flex items-center space-x-2">
+                <img src={panchoBotLogo} alt="PanchoBot" className="w-12 h-12 " />
+                <h2 className="text-blue-800 text-2xl font-bold
+                darl:text-blue-200 dark:text-blue-200">
+                    PanchoBot
+                </h2></div>
             <div className="flex space-x-4">
                 <div className="px-2 py-3 flex items-center space-x-2">
                     <DarkModeToggle />
