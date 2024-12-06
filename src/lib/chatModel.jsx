@@ -17,7 +17,7 @@ export async function preguntar(pregunta, modelo) {
         }
 
         const data = await response.json();
-        return data.answer; // Ajusta esto según la estructura de tu respuesta
+        return data;
     } catch (error) {
         console.error("Error al realizar la petición:", error);
         throw error;

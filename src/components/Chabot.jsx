@@ -29,6 +29,7 @@ export default function Chabot({ selectedModel }) {
             const loadingMessage = {
                 text: "PanchoBot esta escribiendo...",
                 role: "bot",
+                modelo: " "
             };
             setMessages((prevMessages) => [...prevMessages, loadingMessage]);
 
@@ -36,9 +37,9 @@ export default function Chabot({ selectedModel }) {
                 const respuesta = await preguntar(userMessage.text, selectedModel);
                 setMessages((prevMessages) => [
                     ...prevMessages.slice(0, -1), // Elimina el mensaje de carga
-                    { text: respuesta, 
+                    { text: respuesta.answer, 
                         role: "bot" ,
-                        modelo: selectedModel
+                        modelo: respuesta.modelo
                     },
                 ]);
 
@@ -89,7 +90,7 @@ export default function Chabot({ selectedModel }) {
                            {message.role === "bot" && (
                             
                             <b className="text-sm  dark:text-blue-200 text-blue-800">
-                                PanchoBot  {message.modelo}
+                                 {message.modelo}
                             </b>
                            )}
                                  <p class="text-base ">
